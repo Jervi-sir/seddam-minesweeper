@@ -1,0 +1,426 @@
+/*
+  Theme: Metallic / Windows 95
+  - Neutral grays with classic 3D borders
+  - Blue title bar
+  - Pixel-ish system font stack
+*/
+:root {
+  --win-face: #c0c0c0;
+  /* main UI gray */
+  --win-face-2: #d6d6d6;
+  --win-highlight: #ffffff;
+  --win-shadow: #808080;
+  --win-shadow-deep: #404040;
+  --win-text: #000000;
+
+  --titlebar: #000080;
+  --titlebar-text: #ffffff;
+
+  /* Desktop default; mobile is auto-calculated per-board. */
+  --cell-size: 26px;
+  --cell-max: 26px;
+  --radius: 0px;
+
+  --font-ui: "MS Sans Serif", Tahoma, Verdana, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+button {
+  font-family: inherit;
+}
+
+body {
+  margin: 0;
+  color: var(--win-text);
+  background: var(--win-face);
+  font-family: var(--font-ui);
+}
+
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px 16px 30px;
+}
+
+.window {
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+  background: var(--win-face);
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  background: linear-gradient(#0000a8, var(--titlebar));
+  color: var(--titlebar-text);
+  font-size: 12px;
+  font-weight: 700;
+  user-select: none;
+}
+
+.titlebar__text {
+  white-space: nowrap;
+}
+
+.titlebar__buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.titlebar__btn {
+  width: 14px;
+  height: 14px;
+  background: var(--win-face);
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+}
+
+.titlebar__btn--close {
+  background: linear-gradient(#f3b0b0, #d98b8b);
+}
+
+.window__body {
+  padding: 10px;
+}
+
+/* Classic 3D borders */
+.win-raised {
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+  background: var(--win-face);
+}
+
+.win-sunken {
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: var(--win-face-2);
+}
+
+.topbar {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: var(--win-face);
+}
+
+.topbar {
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+}
+
+.topbar>div:first-child {
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: #202020;
+  line-height: 1.35;
+  max-width: 62ch;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.control {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: #202020;
+}
+
+select {
+  appearance: none;
+  padding: 10px 12px;
+  border-radius: 0;
+  color: var(--win-text);
+  outline: none;
+
+  /* Sunken input style */
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: #ffffff;
+}
+
+select:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 0;
+  color: var(--win-text);
+  font-weight: 700;
+  cursor: pointer;
+
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+  background: linear-gradient(#f0f0f0, #cfcfcf);
+}
+
+.btn:hover {
+  background: linear-gradient(#ffffff, #d7d7d7);
+}
+
+.btn:active {
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: linear-gradient(#d0d0d0, #efefef);
+}
+
+.hud {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 8px 10px;
+  border-radius: 0;
+  color: var(--win-text);
+
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: #ffffff;
+}
+
+.status {
+  background: #ffffff;
+}
+
+.status--won {
+  background: #eafff3;
+}
+
+.status--lost {
+  background: #ffecec;
+}
+
+.stage {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.board {
+  /* Defaults overridden via inline style in Board.jsx */
+  --cols: 8;
+  --rows: 8;
+  --gap: 2px;
+  --board-max: min(96vw, 560px);
+
+  /*
+    Mobile-friendly sizing:
+    - Compute a cell size that keeps the whole grid within the viewport.
+    - clamp() ensures a readable minimum and a classic max size.
+  */
+  --cell-size: clamp(
+    14px,
+    calc(
+      (var(--board-max) - 16px - (var(--cols) - 1) * var(--gap)) / var(--cols)
+    ),
+    var(--cell-max)
+  );
+
+  display: grid;
+  gap: var(--gap);
+  padding: 8px;
+  border-radius: 0;
+
+  /* Minesweeper tray look */
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: var(--win-face);
+
+  /* Let the computed cell size drive a "full width" feel. */
+  max-width: var(--board-max);
+  overflow: auto;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-radius: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  user-select: none;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: var(--font-ui);
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cell__content {
+  transform: translateY(-0.5px);
+}
+
+.cell__icon {
+  width: calc(var(--cell-size) * 0.7);
+  height: calc(var(--cell-size) * 0.7);
+  display: block;
+}
+
+.cell--hidden {
+  /* Raised (unpressed) classic Win95 bevel */
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+  background: linear-gradient(#e7e7e7, #bdbdbd);
+}
+
+.cell--hidden:hover {
+  background: linear-gradient(#f0f0f0, #c9c9c9);
+}
+
+.cell--revealed {
+  cursor: default;
+  /* Sunken (pressed) */
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: #dcdcdc;
+}
+
+.cell--flagged {
+  background: linear-gradient(#e7e7e7, #bdbdbd);
+}
+
+.cell--mine {
+  background: #ffb9b9;
+  padding: 0;
+}
+
+.cell--void {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.cell--n1 {
+  color: #0000ff;
+}
+
+.cell--n2 {
+  color: #008000;
+}
+
+.cell--n3 {
+  color: #ff0000;
+}
+
+.cell--n4 {
+  color: #000080;
+}
+
+.cell--n5 {
+  color: #800000;
+}
+
+.cell--n6 {
+  color: #008080;
+}
+
+.cell--n7 {
+  color: #000000;
+}
+
+.cell--n8 {
+  color: #808080;
+}
+
+.message {
+  width: min(680px, 100%);
+  border-radius: 0;
+  background: var(--win-face);
+  padding: 12px 14px;
+  color: var(--win-text);
+
+  border-top: 2px solid var(--win-highlight);
+  border-left: 2px solid var(--win-highlight);
+  border-right: 2px solid var(--win-shadow-deep);
+  border-bottom: 2px solid var(--win-shadow-deep);
+}
+
+.footer {
+  margin-top: 18px;
+  color: #202020;
+  font-size: 12px;
+  text-align: center;
+}
+
+@media (max-width: 540px) {
+  :root {
+    /* Let cells grow so the board can feel "full width" on mobile. */
+    --cell-max: 40px;
+  }
+
+  .app {
+    padding: 10px 10px 16px;
+  }
+
+  .window__body {
+    padding: 8px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls {
+    justify-content: space-between;
+  }
+}
