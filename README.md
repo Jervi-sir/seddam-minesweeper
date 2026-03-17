@@ -1,6 +1,6 @@
-# Win95 Minesweeper (React)
+# Win95 SeddamSweeper (React)
 
-Beginner-friendly Minesweeper built with React + Vite.
+Beginner-friendly SeddamSweeper built with React + Vite.
 
 - Windows 95 / metallic UI
 - Classic reveal + flood fill + flags

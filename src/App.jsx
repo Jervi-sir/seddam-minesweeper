@@ -254,7 +254,7 @@ export default function App() {
     <div className="app">
       <div className="window">
         <div className="titlebar" aria-label="Window title bar">
-          <div className="titlebar__text">Minesweeper</div>
+          <div className="titlebar__text">SeddamSweeper</div>
           <div className="titlebar__buttons" aria-hidden="true">
             <span className="titlebar__btn" />
             <span className="titlebar__btn" />
@@ -265,7 +265,7 @@ export default function App() {
         <div className="window__body">
           <header className="topbar">
             <div>
-              <h1 className="title">Minesweeper</h1>
+              <h1 className="title">S(a/e)ddamSweeper</h1>
               <p className="subtitle">
                 Tap/click: reveal. Right click (or long-press on mobile): flag.
                 Reveal all safe cells to win.

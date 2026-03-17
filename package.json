@@ -1,9 +1,9 @@
 {
-  "name": "win95-minesweeper",
+  "name": "win95-seddamsweeper",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "Minesweeper built with React + Vite featuring a Windows 95 metallic theme, shaped boards, and custom image masks.",
+  "description": "seddamsweeper built with React + Vite featuring a Windows 95 metallic theme, shaped boards, and custom image masks.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -13,7 +13,7 @@
   "keywords": [
     "react",
     "vite",
-    "minesweeper",
+    "seddamsweeper",
     "game",
     "windows-95",
     "beginner-friendly"

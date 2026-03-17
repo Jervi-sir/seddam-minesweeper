@@ -263,20 +263,16 @@ select:focus {
     - Compute a cell size that keeps the whole grid within the viewport.
     - clamp() ensures a readable minimum and a classic max size.
   */
-  --cell-size: clamp(
-    14px,
-    calc(
-      (var(--board-max) - 16px - (var(--cols) - 1) * var(--gap)) / var(--cols)
-    ),
-    var(--cell-max)
-  );
+  --cell-size: clamp(14px,
+      calc((var(--board-max) - 16px - (var(--cols) - 1) * var(--gap)) / var(--cols)),
+      var(--cell-max));
 
   display: grid;
   gap: var(--gap);
   padding: 8px;
   border-radius: 0;
 
-  /* Minesweeper tray look */
+  /* SeddamSweeper tray look */
   border-top: 2px solid var(--win-shadow-deep);
   border-left: 2px solid var(--win-shadow-deep);
   border-right: 2px solid var(--win-highlight);

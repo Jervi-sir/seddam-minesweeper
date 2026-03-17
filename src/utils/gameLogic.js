@@ -1,5 +1,5 @@
 /**
- * Minesweeper game logic (no React in this file).
+ * SeddamSweeper game logic (no React in this file).
  *
  * The board is a 2D array of cell objects.
  * Each cell stores:

@@ -21,7 +21,7 @@ export default function Board({ board, onReveal, onToggleFlag, disabled }) {
         gridTemplateColumns: `repeat(${cols}, var(--cell-size))`,
         gridTemplateRows: `repeat(${rows}, var(--cell-size))`,
       }}
-      aria-label="Minesweeper board"
+      aria-label="SeddamSweeper board"
       role="grid"
     >
       {board.flat().map((cell) => (
