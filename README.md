@@ -20,6 +20,37 @@ npm install
 npm run dev
 ```
 
+## Visitor Tracking (Neon + Vercel)
+
+This project includes a simple visit logger at `api/visit.js`.
+
+- The client POSTs to `/api/visit` once per session.
+- The serverless function stores `ip` (plain text) and `user_agent` in Neon.
+
+Setup:
+
+1) Create the table in Neon:
+
+```sql
+-- see: sql/visits.sql
+```
+
+2) Add `DATABASE_URL` to Vercel project environment variables (Neon connection string).
+
+3) Deploy.
+
+Example queries:
+
+```sql
+-- total visits
+select count(*) from visits;
+
+-- unique IPs today (rough unique visitors)
+select count(distinct ip)
+from visits
+where created_at >= date_trunc('day', now());
+```
+
 Build:
 
 ```bash

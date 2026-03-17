@@ -219,6 +219,37 @@ export default function App() {
 
   const flagsUsed = countFlags(board);
 
+  // Simple visitor tracking (server-side IP capture in /api/visit).
+  useEffect(() => {
+    // StrictMode runs effects twice in dev. Also avoid spamming on refreshes.
+    const key = "win95ms_visit_sent";
+    if (sessionStorage.getItem(key) === "1") return;
+    sessionStorage.setItem(key, "1");
+
+    const payload = JSON.stringify({ path: window.location.pathname });
+
+    // sendBeacon is best-effort and doesn't block navigation.
+    const ok =
+      typeof navigator !== "undefined" &&
+      typeof navigator.sendBeacon === "function" &&
+      navigator.sendBeacon(
+        "/api/visit",
+        new Blob([payload], { type: "application/json" })
+      );
+
+    if (!ok) {
+      // Fallback (keepalive helps on unload).
+      fetch("/api/visit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        keepalive: true,
+      }).catch(() => {
+        // Ignore tracking failures.
+      });
+    }
+  }, []);
+
   return (
     <div className="app">
       <div className="window">
