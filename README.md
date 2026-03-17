@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Win95 Minesweeper (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Beginner-friendly Minesweeper built with React + Vite.
 
-Currently, two official plugins are available:
+- Windows 95 / metallic UI
+- Classic reveal + flood fill + flags
+- Shaped boards (inactive cells form a silhouette)
+- Custom image mode: upload an image and generate a board from the red silhouette
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Controls
 
-## React Compiler
+- Tap/click: reveal
+- Right click: toggle flag (desktop)
+- Long-press: toggle flag (mobile)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run Locally
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Build:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
+
+## Custom Image Boards
+
+Use the `Custom Image...` button.
+
+Tips for best results:
+
+- Use a high-contrast silhouette (red shape on dark background works best)
+- Avoid gradients and transparent edges (crisp shapes generate cleaner masks)
+
+## Project Structure
+
+```text
+src/
+  App.jsx
+  components/
+    Board.jsx
+    Cell.jsx
+  utils/
+    gameLogic.js
+  styles.css
+```
+
+## How Shaped Boards Work
+
+The grid is still rectangular, but each cell has an `isActive` flag.
+
+- Active cells participate in the game
+- Inactive cells render as empty space and are ignored by all rules
+
+
+### AI used
+
+- Opencode CLI, with gpt 5.2 free account
