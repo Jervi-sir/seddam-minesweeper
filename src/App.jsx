@@ -52,6 +52,11 @@ export default function App() {
   // The board is a 2D array of cell objects.
   const [board, setBoard] = useState([]);
 
+  // Bumps every time we start a new run.
+  // Used to force-remount the Board/Cells so per-cell refs (eg. long-press state)
+  // can't leak across restarts and eat the first tap.
+  const [gameId, setGameId] = useState(0);
+
   // "playing" | "lost" | "won"
   const [status, setStatus] = useState("playing");
 
@@ -68,6 +73,13 @@ export default function App() {
 
   // Create a brand-new board.
   const startNewGame = (overrideDifficulty = null) => {
+    // If used directly as an event handler (eg. onClick={startNewGame}),
+    // React will pass the click event as the first argument.
+    // Treat that as "no override".
+    if (overrideDifficulty && typeof overrideDifficulty.preventDefault === "function") {
+      overrideDifficulty = null;
+    }
+
     const runId = newGameRunIdRef.current + 1;
     newGameRunIdRef.current = runId;
 
@@ -114,9 +126,9 @@ export default function App() {
       // 4) Compute numbers for each cell.
       const withNumbers = calculateAdjacency(fresh);
 
+      setGameId(runId);
       setBoard(withNumbers);
       setStatus("playing");
-      setInputMode("reveal");
     };
 
     void start();
@@ -318,7 +330,7 @@ export default function App() {
                   Custom Image...
                 </button>
 
-                <button className="btn" onClick={startNewGame} type="button">
+                <button className="btn" onClick={() => startNewGame()} type="button">
                   Restart
                 </button>
               </div>
@@ -341,6 +353,7 @@ export default function App() {
 
           <main className="stage">
             <Board
+              key={gameId}
               board={board}
               onReveal={handlePrimaryAction}
               onToggleFlag={handleToggleFlag}
