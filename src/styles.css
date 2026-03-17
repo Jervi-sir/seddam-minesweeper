@@ -154,6 +154,12 @@ body {
   align-items: flex-end;
 }
 
+.controls__buttons {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
 .control {
   display: grid;
   gap: 6px;
@@ -421,6 +427,16 @@ select:focus {
   }
 
   .controls {
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls__buttons .btn {
+    width: 100%;
   }
 }

@@ -15,19 +15,7 @@ import "./styles.css";
 
 // Difficulty presets (bonus feature). Easy is the default.
 const BASE_DIFFICULTIES = {
-  // Rectangular boards work better on mobile (fills width more naturally).
-  easy: { label: "Easy (10x8, 12 mines)", rows: 8, cols: 10, mines: 12 },
-  medium: { label: "Medium (14x10, 30 mines)", rows: 10, cols: 14, mines: 30 },
-  // Extra-wide + short, inspired by the bomb.svg silhouette.
-  bomb: { label: "Bomb Shape (22x7, 30 mines)", rows: 7, cols: 22, mines: 30 },
   // Image-masked boards (silhouettes from /public).
-  seddamHorizontal: {
-    label: "Seddam (horizontal mask)",
-    rows: 12,
-    cols: 28,
-    mines: 30,
-    maskImageUrl: "/seddam-horizontal.png",
-  },
   seddamVertical: {
     label: "Seddam (vertical mask)",
     rows: 28,
@@ -35,6 +23,17 @@ const BASE_DIFFICULTIES = {
     mines: 30,
     maskImageUrl: "/seddam-vertical.png",
   },
+  seddamHorizontal: {
+    label: "Seddam (horizontal mask)",
+    rows: 12,
+    cols: 28,
+    mines: 30,
+    maskImageUrl: "/seddam-horizontal.png",
+  },
+  // Rectangular boards work better on mobile (fills width more naturally).
+  easy: { label: "Easy (10x8, 12 mines)", rows: 8, cols: 10, mines: 12 },
+  medium: { label: "Medium (14x10, 30 mines)", rows: 10, cols: 14, mines: 30 },
+
 };
 
 export default function App() {
@@ -44,7 +43,7 @@ export default function App() {
     return { ...BASE_DIFFICULTIES, custom: customDifficulty };
   }, [customDifficulty]);
 
-  const [difficultyKey, setDifficultyKey] = useState("easy");
+  const [difficultyKey, setDifficultyKey] = useState("seddamVertical");
   const difficulty = useMemo(
     () => difficulties[difficultyKey],
     [difficulties, difficultyKey]
@@ -243,35 +242,39 @@ export default function App() {
             </div>
 
             <div className="controls">
-              <label className="control">
-                Difficulty
-                <select
-                  value={difficultyKey}
-                  onChange={(e) => setDifficultyKey(e.target.value)}
-                >
-                  {Object.entries(difficulties).map(([key, d]) => (
-                    <option key={key} value={key}>
-                      {d.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <div>
+                <label className="control">
+                  Difficulty
+                  <select
+                    value={difficultyKey}
+                    onChange={(e) => setDifficultyKey(e.target.value)}
+                  >
+                    {Object.entries(difficulties).map(([key, d]) => (
+                      <option key={key} value={key}>
+                        {d.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
-              <input
-                ref={customFileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleCustomFileChange}
-                style={{ display: "none" }}
-              />
+                <input
+                  ref={customFileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleCustomFileChange}
+                  style={{ display: "none" }}
+                />
+              </div>
 
-              <button className="btn" onClick={handlePickCustomImage} type="button">
-                Custom Image...
-              </button>
+              <div className="controls__buttons">
+                <button className="btn" onClick={handlePickCustomImage} type="button">
+                  Custom Image...
+                </button>
 
-              <button className="btn" onClick={startNewGame} type="button">
-                Restart
-              </button>
+                <button className="btn" onClick={startNewGame} type="button">
+                  Restart
+                </button>
+              </div>
             </div>
           </header>
 
