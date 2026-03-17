@@ -403,6 +403,24 @@ select:focus {
   text-align: center;
 }
 
+/* Floating tap-mode toggle (mobile) */
+.modeToggle {
+  display: none;
+}
+
+.modeToggle__btn {
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.modeToggle__btn--active {
+  border-top: 2px solid var(--win-shadow-deep);
+  border-left: 2px solid var(--win-shadow-deep);
+  border-right: 2px solid var(--win-highlight);
+  border-bottom: 2px solid var(--win-highlight);
+  background: linear-gradient(#d0d0d0, #efefef);
+}
+
 @media (max-width: 540px) {
   :root {
     /* Let cells grow so the board can feel "full width" on mobile. */
@@ -434,5 +452,20 @@ select:focus {
 
   .controls__buttons .btn {
     width: 100%;
+  }
+
+  .modeToggle {
+    position: fixed;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    background: var(--win-face);
+    border-top: 2px solid var(--win-highlight);
+    border-left: 2px solid var(--win-highlight);
+    border-right: 2px solid var(--win-shadow-deep);
+    border-bottom: 2px solid var(--win-shadow-deep);
+    z-index: 50;
   }
 }

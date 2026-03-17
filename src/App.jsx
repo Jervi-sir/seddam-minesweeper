@@ -55,6 +55,11 @@ export default function App() {
   // "playing" | "lost" | "won"
   const [status, setStatus] = useState("playing");
 
+  // Mobile-friendly primary input mode.
+  // - "reveal": tap/click reveals
+  // - "flag": tap/click toggles a flag
+  const [inputMode, setInputMode] = useState("reveal");
+
   // Cache dynamic (image-based) masks so we only decode the image once.
   const maskCacheRef = useRef(new Map());
   const newGameRunIdRef = useRef(0);
@@ -111,6 +116,7 @@ export default function App() {
 
       setBoard(withNumbers);
       setStatus("playing");
+      setInputMode("reveal");
     };
 
     void start();
@@ -219,6 +225,16 @@ export default function App() {
 
   const flagsUsed = countFlags(board);
 
+  // Primary action for cell taps/clicks.
+  // On mobile the floating toggle lets the user choose Reveal vs Flag.
+  const handlePrimaryAction = (row, col) => {
+    if (inputMode === "flag") {
+      handleToggleFlag(row, col);
+      return;
+    }
+    handleReveal(row, col);
+  };
+
   // Simple visitor tracking (server-side IP capture in /api/visit).
   useEffect(() => {
     // StrictMode runs effects twice in dev. Also avoid spamming on refreshes.
@@ -265,7 +281,7 @@ export default function App() {
         <div className="window__body">
           <header className="topbar">
             <div>
-              <h1 className="title">S(a/e)ddamSweeper</h1>
+              <h1 className="title">S(a/e)ddam Sweeper</h1>
               <p className="subtitle">
                 Tap/click: reveal. Right click (or long-press on mobile): flag.
                 Reveal all safe cells to win.
@@ -326,7 +342,7 @@ export default function App() {
           <main className="stage">
             <Board
               board={board}
-              onReveal={handleReveal}
+              onReveal={handlePrimaryAction}
               onToggleFlag={handleToggleFlag}
               disabled={status !== "playing"}
             />
@@ -351,6 +367,29 @@ export default function App() {
             cells.
           </footer>
         </div>
+      </div>
+
+      {/*
+        Floating mode toggle (mobile):
+        lets the user switch tap behavior between Reveal and Flag.
+      */}
+      <div className="modeToggle" role="group" aria-label="Tap mode">
+        <button
+          type="button"
+          className={`btn modeToggle__btn ${inputMode === "reveal" ? "modeToggle__btn--active" : ""}`}
+          onClick={() => setInputMode("reveal")}
+          disabled={status !== "playing"}
+        >
+          Reveal
+        </button>
+        <button
+          type="button"
+          className={`btn modeToggle__btn ${inputMode === "flag" ? "modeToggle__btn--active" : ""}`}
+          onClick={() => setInputMode("flag")}
+          disabled={status !== "playing"}
+        >
+          Flag
+        </button>
       </div>
     </div>
   );
